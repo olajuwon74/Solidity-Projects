@@ -6,7 +6,6 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 contract PriceConsumerV3 {
 
     AggregatorV3Interface internal priceFeed;
-
     /**
      * Network: Kovan
      * Aggregator: ETH/USD
