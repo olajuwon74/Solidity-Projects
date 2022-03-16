@@ -2,26 +2,24 @@
 pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
-/
+/**
  * THIS EXAMPLE USES UN-AUDITED CODE.
  * Network: Kovan
  * Base: BTC/USD
  * Base Address: 0x6135b13325bfC4B00278B4abC5e20bbce2D6580e
- * Quote: EUR/USD
- * Quote Address: 0x0c15Ab9A0DB086e062194c273CC79f41597Bbf13
+ * Quote: BNB/USD
+ * Quote Address: 0x8993ED705cdf5e84D0a3B754b5Ee0e1783fcdF16
  * Decimals: 8
  */
 
- //0x8993ED705cdf5e84D0a3B754b5Ee0e1783fcdF16
-
 contract PriceConverter {
-    function getDerivedPrice(address _base, address _quote, uint8 _decimals)
+    function getDerivedPrice(address _base, address _quote, uint8 decimals)
         public
         view
         returns (int256)
     {
         require(_decimals > uint8(0) && _decimals <= uint8(18), "Invalid _decimals");
-        int256 decimals = int256(10  uint256(_decimals));
+        int256 decimals = int256(10 ** uint256(_decimals));
         ( , int256 basePrice, , , ) = AggregatorV3Interface(_base).latestRoundData();
         uint8 baseDecimals = AggregatorV3Interface(_base).decimals();
         basePrice = scalePrice(basePrice, baseDecimals, _decimals);
@@ -39,10 +37,15 @@ contract PriceConverter {
         returns (int256)
     {
         if (_priceDecimals < _decimals) {
-            return _price * int256(10  uint256(_decimals - _priceDecimals));
+            return _price * int256(10 ** uint256(_decimals - _priceDecimals));
         } else if (_priceDecimals > _decimals) {
-            return _price / int256(10  uint256(_priceDecimals - _decimals));
+            return _price / int256(10 ** uint256(_priceDecimals - _decimals));
         }
         return _price;
     }
+
+      function swapTokens(address _base, address _quote, int amount, uint8 decimals) public returns(int){
+        return getDerivedPrice(_base,_quote, decimals) * amount;
+    }
+
 }

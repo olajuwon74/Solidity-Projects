@@ -5,6 +5,8 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract PriceConsumerV3 {
 
+    //   int reverseAmount;
+
     AggregatorV3Interface internal priceFeed;
     /**
      * Network: Kovan
@@ -12,7 +14,7 @@ contract PriceConsumerV3 {
      * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
      */
     constructor() {
-        priceFeed = AggregatorV3Interface(0xeE636E1f7A0A846EEc2385E729CeA7D1b339D40D);
+        priceFeed = AggregatorV3Interface(0x0bF499444525a23E7Bb61997539725cA2e928138);
     }
 
     /**
@@ -26,6 +28,11 @@ contract PriceConsumerV3 {
             /*uint timeStamp*/,
             /*uint80 answeredInRound*/
         ) = priceFeed.latestRoundData();
-        return price;
+        return (price);
+    }
+
+    function swapIt(int amountUSDT) public view returns(int reverseAmount){
+       reverseAmount = (amountUSDT * (getLatestPrice()/10**8));
+        return reverseAmount;
     }
 }
