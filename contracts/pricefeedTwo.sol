@@ -17,7 +17,7 @@ contract Change{
     }
 
 
-    PriceConverter private p = PriceConverter( 0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE);
+    PriceConverter private p = PriceConverter(0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE);
     address internal tokenA = 0x514910771AF9Ca656af840dff83E8264EcF986CA;
     address internal tokenB = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
 

@@ -9,4 +9,5 @@ interface IERC20{
         uint256 amount
     ) external returns (bool);
     function balanceOf(address addr)external view returns(uint);
+    function approve(address spender, uint amount)external returns (bool);
 }
