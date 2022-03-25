@@ -1,12 +1,47 @@
 /* eslint-disable prettier/prettier */
-const { ethers } = require("ethers") // for nodejs only
-const provider = new ethers.providers.JsonRpcProvider("https://eth-mainnet.alchemyapi.io/v2/DMh-Tv0Zka2b2eG7oD4dKFJbWd7rG-q9")
-const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
-const addr = "0x0bF499444525a23E7Bb61997539725cA2e928138"
-const priceFeed = new ethers.Contract(addr, aggregatorV3InterfaceABI, provider)
-priceFeed.latestRoundData()
-// @ts-ignore
-    .then((roundData) => {
-        // Do something with roundData
-        console.log("Latest Round Data", ((roundData.answer) / 10**8).toFixed(2))
-    })
+import {Signer} from 'ethers';
+import {ethers} from "hardhat";
+const hre = require ('hardhat');
+
+
+// Link = "0x51ea2D5b8ae4018B105fA9d183aA773eBB576265"
+// Dai = "0xc1944b61B50B286A1FB39e5f13dd389BA5765C2D"
+
+
+
+async function swapTokens() {
+    const address1 =  "0x51ea2D5b8ae4018B105fA9d183aA773eBB576265";
+    const address2 = "0x40a42Baf86Fc821f972Ad2aC878729063CeEF403";
+    const link = await ethers.getContractAt(
+        "IERC20",
+        // link address
+        "0x514910771af9ca656af840dff83e8264ecf986ca"
+      );
+
+
+//     const balance1 = await link.balanceOf(address1);
+//     console.log(balance1);
+
+//    // @ts-ignore
+//    await hre.network.provider.request({
+//     method: "hardhat_impersonateAccount",
+//     params: [address1],
+//   });
+
+//   const signer: Signer = await ethers.getSigner(address1);
+//   await link.connect(signer).transfer(address2, 40);
+//   const balanceLink = await link.balanceOf(address1);
+//   const balanceAddress2 = await link.balanceOf(address2);
+//   console.log(balanceLink);
+//   console.log(balanceAddress2);
+
+
+const swap
+
+      
+}
+
+swapTokens().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
